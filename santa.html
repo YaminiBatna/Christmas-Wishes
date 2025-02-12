@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Wishes</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-style:oblique;
+    }
+
+    body {
+      background-image: url(https://t4.ftcdn.net/jpg/06/58/80/09/360_F_658800936_Xu85SQm8YHIyH6fsLD8kPuxo21x8RADH.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position:top;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: background-image 1s ease;
+    }
+
+
+    /* Header styling */
+    h1 {
+      font-size: 4rem;
+      margin-top: 300px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Button styling */
+   /* From Uiverse.io by lenfear23 */ 
+button {
+  margin: 12px;
+  height: 50px;
+  width: 140px;
+  border-radius: 10px;
+  background: #333;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #444,
+    inset -5px -5px 10px #222;
+  font-family: "Damion", cursive;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  color: rgb(161, 161, 161);
+  transition: 500ms;
+}
+
+button:hover {
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222,
+    inset -5px -5px 10px #444;
+  color: #d6d6d6;
+  transition: 500ms;
+}
+#showWishesBtn:hover {
+      background: burlywood;
+      transform: scale(1.05);
+    }
+
+
+    /* Wishes container */
+    .wishes {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 1s ease;
+      font-size: 2rem;
+      margin-left: -380px;
+      margin-top: 300px;
+      
+    }
+
+    .wishes.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Snowflake animations */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 1.5rem;
+      user-select: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Title -->
+  <h1 id="greeting"><i>say CHRISTMAS cheers!!</i></h1>
+
+  <!-- Button to show wishes -->
+  <button id="showWishesBtn"><b>Baking Memories</b></button>
+
+  <!-- Hidden wishes -->
+  <div class="wishes" id="wishes">
+    <p><section> <br><h3>Santa’s heard what a wonderful<br>boy/girl you’ve been this year, <br> he’s already started packing his sleigh<br></h3></section>
+    </p><small><sub>The spirit of Christmas b with u all year round.</sub></small>  
+  </div>
+
+   <!-- Audio element -->
+   <audio id="backgroundMusic" src="dec.mp3"></audio>
+  <script>
+
+    // Button to show wishes and hide greeting
+    const button = document.getElementById("showWishesBtn");
+    const wishes = document.getElementById("wishes");
+    const greeting = document.getElementById("greeting");
+    const body = document.body;
+    const audio = document.getElementById("backgroundMusic");
+
+
+    button.addEventListener("click", () => {
+      // Show the wishes and snowflakes
+      wishes.classList.add("show");
+      generateSnowflakes();
+
+      // Change the background image after button click
+      body.style.backgroundImage = "url('img.jpg.jpg')"; // New background
+      body.style.backgroundSize = 'cover';
+      body.style.backgroundPosition = 'center';
+
+
+      // Hide the greeting and button
+      greeting.style.display = 'none';
+      button.style.display = 'none';
+
+       // Play the background music
+       audio.play();
+    });
+
+    // Function to generate snowflakes
+    function generateSnowflakes() {
+      for (let i = 0; i < 30; i++) {
+        const snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.textContent = "❄";
+        snowflake.style.left = Math.random() * 100 + "vw";
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+        snowflake.style.opacity = Math.random();
+        snowflake.style.fontSize = Math.random() * 20 + 10 + "px";
+        document.body.appendChild(snowflake);
+
+        // Remove snowflake after animation ends
+        snowflake.addEventListener("animationend", () => {
+          snowflake.remove();
+        });
+      }
+    }
+  </script>
+</body>
+</html>
